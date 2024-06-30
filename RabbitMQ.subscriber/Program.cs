@@ -13,6 +13,19 @@ using var connection = factory.CreateConnection();
 //bu kanal üzerinden artık rabbitMq ile haberlesme saglanacak
 var channel = connection.CreateModel();
 
+//subscriber 'lara mesajlar kacar kacar gelecek belirtildi.
+
+//1. parametrenin 0 olması demek herhangi bir boyuttaki mesajın gönderilebileceği anlamına gelir
+
+//2. parametre ile mesajların 1 'er 1 'er gönderileceği anlamına gelir
+
+//3. parametre ile mesajların tek seferde mi gönderileceği yoksa eşit bir şekilde
+//dagıtılarak mı gönderileceği anlamına gelir
+//true: tek seferde 2. parametredeki sayı kadar mesaj gitsin,
+//false : 2. parametredeki sayı kadar eşit dağıtılsın
+
+channel.BasicQos(0, 1, false);
+
 //haberlesme saglanması icin mevcutta bir kuyrugun olması gerekiyor
 //kuyruk olusturulurken girilen parametreler sırasıyla,
 
@@ -45,13 +58,20 @@ var consumer = new EventingBasicConsumer(channel);
 //için haber vereceğim
 
 //3. parametre ile kuyruktaki mesajı okuyacak olan yapıyı veriyorum
-channel.BasicConsume("hello-queue", true, consumer);
+channel.BasicConsume("hello-queue", false, consumer);
 
 //mesajı artık okuyabilirim
 consumer.Received += (sender, args) =>
 {
     var message = Encoding.UTF8.GetString(args.Body.ToArray());
+
+    Thread.Sleep(1500);
+
     Console.WriteLine("Gelen Mesaj: " + message);
+
+    //2. parametre ile sadece ilgili mesajın durumunu yani işlendiği bilgisini rabbitMq'ya
+    //haber verir.
+    channel.BasicAck(args.DeliveryTag, false);
 };
 
 Console.ReadLine();

@@ -29,17 +29,22 @@ var channel = connection.CreateModel();
 
 channel.QueueDeclare("hello-queue", true, false, false);
 
-//kuyruga bırakılacak mesaj oluşturuldu.
-string message = "hello world";
+//50 tane mesaj gönderildi.
+Enumerable.Range(1, 50).ToList().ForEach(x =>
+{
+    //kuyruga bırakılacak mesaj oluşturuldu.
+    string message = $"Message {x}";
 
-//rabbitMq 'ya veriler byte olarak gönderilir
-var messageBody = Encoding.UTF8.GetBytes(message);
+    //rabbitMq 'ya veriler byte olarak gönderilir
+    var messageBody = Encoding.UTF8.GetBytes(message);
 
-//mesajı kuyruga bırabilirim artık.
+    //mesajı kuyruga bırabilirim artık.
 
-//exchange kullanmadıgım için 1. parametrem string.Empty ve 2. parametrem de direkt olarak
-//kuyrugun adı.
-channel.BasicPublish(string.Empty, "hello-queue", null, messageBody);
+    //exchange kullanmadıgım için 1. parametrem string.Empty ve 2. parametrem de direkt olarak
+    //kuyrugun adı.
+    channel.BasicPublish(string.Empty, "hello-queue", null, messageBody);
 
-Console.WriteLine("Mesaj gönderilmiştir.");
+    Console.WriteLine($"Mesaj gönderilmiştir: {message}");
+});
+
 Console.ReadLine();
