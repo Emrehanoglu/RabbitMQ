@@ -13,6 +13,15 @@ using var connection = factory.CreateConnection();
 //bu kanal üzerinden artık rabbitMq ile haberlesme saglanacak
 var channel = connection.CreateModel();
 
+//Fanout exchange kullanımında kuyrugu subscriber tarafında oluşturdum.
+//QueueDeclare ile yapmadım bu sefer, cunku subscriber tarafını kapatıldıgında kuyruklarda silinsin istiyorum
+//Bu yüzden QueueBind ile kuyrukları subscriber 'lara bagladım.
+//QueueDeclare : kalıcı kuyruk, QueueBind : geçiçi kuyruk
+
+var randomQueueName = channel.QueueDeclare().QueueName;
+
+channel.QueueBind(randomQueueName, "logs-fanout", "", null);
+
 //subscriber 'lara mesajlar kacar kacar gelecek belirtildi.
 
 //1. parametrenin 0 olması demek herhangi bir boyuttaki mesajın gönderilebileceği anlamına gelir
@@ -32,7 +41,7 @@ channel.BasicQos(0, 1, false);
 //1. parametre queue --> kuyruk adı
 
 //2. parametre durable --> rabbitMq 'ya restart atıldıgında içerisindeki datalar hafızaya kaydedilir ve kaybolmamış olur.
-//true : hafızaya kaydetme, datalar silinsin, false : hafızaya kaydet, datalar silinmesin
+//true : fiziksel olarak kaydet, datalar silinmesin, false : kaydetme, datalar silinsin
 
 //3. parametre exclusive --> olusturulan bu kuyruga farklı kanallar üzerinden de baglanılabilsin mi?
 //true : sadece bu kanal baglanalabilsin, false : farklı kanallarda baglanalabilsin
@@ -43,6 +52,7 @@ channel.BasicQos(0, 1, false);
 
 //publisher tarafında zaten bu kuyruk oldugu için subscriber tarafında
 //kuyrugun tekrar olusturulmasına gerek yok.
+
 //channel.QueueDeclare("hello-queue", true, false, false);
 
 //kuyruktaki mesajı okuyacak olan yapı
@@ -58,7 +68,9 @@ var consumer = new EventingBasicConsumer(channel);
 //için haber vereceğim
 
 //3. parametre ile kuyruktaki mesajı okuyacak olan yapıyı veriyorum
-channel.BasicConsume("hello-queue", false, consumer);
+channel.BasicConsume(randomQueueName, false, consumer);
+
+Console.WriteLine("Loglar Dinleniyor...");
 
 //mesajı artık okuyabilirim
 consumer.Received += (sender, args) =>

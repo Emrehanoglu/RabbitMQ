@@ -17,8 +17,8 @@ var channel = connection.CreateModel();
 
 //1. parametre queue --> kuyruk adı
 
-//2. parametre durable --> rabbitMq 'ya restart atıldıgında içerisindeki datalar hafızaya kaydedilir ve kaybolmamış olur.
-//true : hafızaya kaydet, datalar silinmesin, false : hafızaya kaydetme, datalar silinsin
+//2. parametre durable --> rabbitMq 'ya restart atıldıgında içerisindeki datalar fiziksel olarak diske kaydedilir ve kaybolmamış olur.
+//true : fiziksel olarak kaydet, datalar silinmesin, false : kaydetme, datalar silinsin
 
 //3. parametre exclusive --> olusturulan bu kuyruga farklı kanallar üzerinden de baglanılabilsin mi?
 //true : sadece bu kanal baglanalabilsin, false : farklı kanallarda baglanalabilsin
@@ -33,7 +33,7 @@ var channel = connection.CreateModel();
 
 //1. parametre exchange --> exchange adı
 
-//2. parametre durable --> uygulamaya restart atılırsa exchange 'im kaybolmasın
+//2. parametre durable --> uygulamaya restart atılırsa exchange 'im kaybolmasın, fiziksel olarak kaydedilsin
 
 //3. parametre type ---> exchange tipinin fanout oldugunu belirttim
 
