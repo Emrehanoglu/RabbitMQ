@@ -18,7 +18,7 @@ var channel = connection.CreateModel();
 //1. parametre queue --> kuyruk adı
 
 //2. parametre durable --> rabbitMq 'ya restart atıldıgında içerisindeki datalar hafızaya kaydedilir ve kaybolmamış olur.
-//true : hafızaya kaydetme, datalar silinsin, false : hafızaya kaydet, datalar silinmesin
+//true : hafızaya kaydet, datalar silinmesin, false : hafızaya kaydetme, datalar silinsin
 
 //3. parametre exclusive --> olusturulan bu kuyruga farklı kanallar üzerinden de baglanılabilsin mi?
 //true : sadece bu kanal baglanalabilsin, false : farklı kanallarda baglanalabilsin
@@ -27,22 +27,34 @@ var channel = connection.CreateModel();
 //dinleyen bir subscribe kalmaz ise kuyrukta silinsin mi?
 //true : evet silinsin, false : silinmesin, kuyruk her zaman ayakta kalsın
 
-channel.QueueDeclare("hello-queue", true, false, false);
+//channel.QueueDeclare("hello-queue", true, false, false);
+
+//Fanout Exchange tanımlama işlemi
+
+//1. parametre exchange --> exchange adı
+
+//2. parametre durable --> uygulamaya restart atılırsa exchange 'im kaybolmasın
+
+//3. parametre type ---> exchange tipinin fanout oldugunu belirttim
+
+channel.ExchangeDeclare("logs-fanout",durable: true, type: ExchangeType.Fanout);
 
 //50 tane mesaj gönderildi.
 Enumerable.Range(1, 50).ToList().ForEach(x =>
 {
     //kuyruga bırakılacak mesaj oluşturuldu.
-    string message = $"Message {x}";
+    string message = $"log {x}";
 
     //rabbitMq 'ya veriler byte olarak gönderilir
     var messageBody = Encoding.UTF8.GetBytes(message);
 
     //mesajı kuyruga bırabilirim artık.
 
-    //exchange kullanmadıgım için 1. parametrem string.Empty ve 2. parametrem de direkt olarak
-    //kuyrugun adı.
-    channel.BasicPublish(string.Empty, "hello-queue", null, messageBody);
+    //exchange kullanmadıgım için 1. parametrem string.Empty ve 2. parametre kuyrugun adı.
+
+    //fanout exchange kullanacagım için 1. parametrem exchange 'in adını alacak ve
+    //2. parametre boş kalacak cunku artık root key 'e ihtiyac yok bunu exchange yapacak.
+    channel.BasicPublish("logs-fanout", "hello-queue", null, messageBody);
 
     Console.WriteLine($"Mesaj gönderilmiştir: {message}");
 });
