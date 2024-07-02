@@ -17,10 +17,11 @@ var channel = connection.CreateModel();
 //QueueDeclare ile yapmadım bu sefer, cunku subscriber tarafını kapatıldıgında kuyruklarda silinsin istiyorum
 //Bu yüzden QueueBind ile kuyrukları subscriber 'lara bagladım.
 //QueueDeclare : kalıcı kuyruk, QueueBind : geçiçi kuyruk
+//burada randomQueue olusturmamın nedeni aynı container üzerinden 2 farklı subscriber
+//ayaga kaldırdıgımda bunlar farklı queue 'lar üretmiş olsun
+//var randomQueueName = channel.QueueDeclare().QueueName;
 
-var randomQueueName = channel.QueueDeclare().QueueName;
-
-channel.QueueBind(randomQueueName, "logs-fanout", "", null);
+//channel.QueueBind(randomQueueName, "logs-fanout", "", null);
 
 //subscriber 'lara mesajlar kacar kacar gelecek belirtildi.
 
@@ -68,7 +69,11 @@ var consumer = new EventingBasicConsumer(channel);
 //için haber vereceğim
 
 //3. parametre ile kuyruktaki mesajı okuyacak olan yapıyı veriyorum
-channel.BasicConsume(randomQueueName, false, consumer);
+//channel.BasicConsume(randomQueueName, false, consumer);
+
+//DirectExchange için log serviyelerine göre subscriber ilgili queue 'yu dinleyecek
+var queueName = "direct-queue-Critical";
+channel.BasicConsume(queueName,false,consumer);
 
 Console.WriteLine("Loglar Dinleniyor...");
 
@@ -80,6 +85,10 @@ consumer.Received += (sender, args) =>
     Thread.Sleep(1500);
 
     Console.WriteLine("Gelen Mesaj: " + message);
+
+    //gelen mesajı txt dosyasına yazdırma,
+    //C:\Users\Emre\Desktop\EmreHanoglu\RabbitMQ\RabbitMQ\RabbitMQ.subscriber\bin\Debug\net6.0
+    //File.AppendAllText("log-critical.txt", message + "\n");
 
     //2. parametre ile sadece ilgili mesajın durumunu yani işlendiği bilgisini rabbitMq'ya
     //haber verir.
