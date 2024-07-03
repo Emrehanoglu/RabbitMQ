@@ -37,21 +37,21 @@ var channel = connection.CreateModel();
 
 //3. parametre type ---> exchange tipinin fanout oldugunu belirttim
 
-channel.ExchangeDeclare("logs-direct",durable: true, type: ExchangeType.Direct);
+channel.ExchangeDeclare("logs-topic",durable: true, type: ExchangeType.Topic);
 
 //DirectExchange adımları, 4 farklı log seviyesi için 4 farklı queue ve route oluşturuldu
 
 Enum.GetNames(typeof(LogNames)).ToList().ForEach(x =>
 {
-    var queueName = $"direct-queue-{x}";
-    channel.QueueDeclare(queueName, true, false, false);
+    ////DirectExchange
+    //var queueName = $"direct-queue-{x}";
+    //channel.QueueDeclare(queueName, true, false, false);
+    //channel.QueueBind(queueName, "logs-direct", routeKey,null);
 
-    //olusturdugum kuyrugu DirectExchange 'e bind ediyorum ve 
-    //bind sırasında route key 'in girilmesi gerekiyor
-    //DirectExchange için oncelikle routingkey 'in olusturulması gerekiyor
-    var routeKey = $"route-{x}";
-
-    channel.QueueBind(queueName, "logs-direct", routeKey,null);
+    ////olusturdugum kuyrugu DirectExchange 'e bind ediyorum ve 
+    ////bind sırasında route key 'in girilmesi gerekiyor
+    ////DirectExchange için oncelikle routingkey 'in olusturulması gerekiyor
+    //var routeKey = $"route-{x}";
 });
 
 //50 tane mesaj gönderildi.
@@ -59,25 +59,35 @@ Enumerable.Range(1, 50).ToList().ForEach(x =>
 {
     //her mesaj üretilip iletilirken random bir log seviyesi üretip ona göre ilgili
     //queue 'ya gönderilecek
-    LogNames log = (LogNames)new Random().Next(1,5);
+    //LogNames log = (LogNames)new Random().Next(1,5);
+
+    
+
+    ////mesajı kuyruga bırabilirim artık.
+
+    ////exchange kullanmadıgım için 1. parametrem string.Empty ve 2. parametre kuyrugun adı.
+
+    ////fanout exchange kullanacagım için 1. parametrem exchange 'in adını alacak ve
+    ////2. parametre boş kalacak cunku artık root key 'e ihtiyac yok bunu exchange yapacak.
+    ////channel.BasicPublish("logs-fanout", "", null, messageBody);
+
+    ////DirectExchange için oncelikle routingkey 'in olusturulması gerekiyor
+    //var routeKey = $"route-{log}";
+
+    //TopicExchange için random kuyruklar ürettim
+    Random rnd = new Random();
+    LogNames log1 = (LogNames)rnd.Next(1, 5);
+    LogNames log2 = (LogNames)rnd.Next(1, 5);
+    LogNames log3 = (LogNames)rnd.Next(1, 5);
+
+    var routeKey = $"{log1}.{log2}.{log3}";
 
     //kuyruga bırakılacak mesaj oluşturuldu.
-    string message = $"{x}. log-type: {log}";
+    string message = $"{x}. log-type: {log1}-{log2}-{log3}";
 
     //rabbitMq 'ya veriler byte olarak gönderilir
     var messageBody = Encoding.UTF8.GetBytes(message);
-
-    //mesajı kuyruga bırabilirim artık.
-
-    //exchange kullanmadıgım için 1. parametrem string.Empty ve 2. parametre kuyrugun adı.
-
-    //fanout exchange kullanacagım için 1. parametrem exchange 'in adını alacak ve
-    //2. parametre boş kalacak cunku artık root key 'e ihtiyac yok bunu exchange yapacak.
-    //channel.BasicPublish("logs-fanout", "", null, messageBody);
-
-    //DirectExchange için oncelikle routingkey 'in olusturulması gerekiyor
-    var routeKey = $"route-{log}";
-    channel.BasicPublish("logs-direct", routeKey, null, messageBody);
+    channel.BasicPublish("logs-topic", routeKey, null, messageBody);
 
     Console.WriteLine($"Log gönderilmiştir: {message}");
 });
