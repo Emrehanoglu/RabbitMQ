@@ -13,6 +13,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQ.HeaderPublisher", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQ.HeaderSubscriber", "RabbitMQ.HeaderSubscriber\RabbitMQ.HeaderSubscriber.csproj", "{0BDC44C2-822D-4EE1-8325-2A1561F7F356}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{08024CA4-0795-4152-BF0B-1D8390743432}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQ.ComplexTypePublisher", "RabbitMQ.ComplexTypePublisher\RabbitMQ.ComplexTypePublisher.csproj", "{A391B67C-E6C2-4C48-B788-5E9BBBB9B811}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQ.ComplexTypeSubscriber", "RabbitMQ.ComplexTypeSubscriber\RabbitMQ.ComplexTypeSubscriber.csproj", "{27E53D51-D492-4356-A782-29453CC8BC76}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +45,18 @@ Global
 		{0BDC44C2-822D-4EE1-8325-2A1561F7F356}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BDC44C2-822D-4EE1-8325-2A1561F7F356}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0BDC44C2-822D-4EE1-8325-2A1561F7F356}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08024CA4-0795-4152-BF0B-1D8390743432}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08024CA4-0795-4152-BF0B-1D8390743432}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08024CA4-0795-4152-BF0B-1D8390743432}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08024CA4-0795-4152-BF0B-1D8390743432}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A391B67C-E6C2-4C48-B788-5E9BBBB9B811}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A391B67C-E6C2-4C48-B788-5E9BBBB9B811}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A391B67C-E6C2-4C48-B788-5E9BBBB9B811}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A391B67C-E6C2-4C48-B788-5E9BBBB9B811}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27E53D51-D492-4356-A782-29453CC8BC76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27E53D51-D492-4356-A782-29453CC8BC76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27E53D51-D492-4356-A782-29453CC8BC76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27E53D51-D492-4356-A782-29453CC8BC76}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
