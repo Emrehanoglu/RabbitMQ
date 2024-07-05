@@ -14,9 +14,10 @@ var channel = connection.CreateModel();
 
 //1. parametre exchange --> exchange adı
 
-//2. parametre durable --> uygulamaya restart atılırsa exchange 'im kaybolmasın, fiziksel olarak kaydedilsin
+//2. parametre durable --> rabbitMq 'ya restart atıldıgında içerisindeki datalar fiziksel olarak diske kaydedilir ve kaybolmamış olur.
+//true : fiziksel olarak kaydet, datalar silinmesin, false : kaydetme, datalar silinsin
 
-//3. parametre type ---> exchange tipinin fanout oldugunu belirttim
+//3. parametre type ---> exchange tipinin Headers oldugunu belirttim
 
 channel.ExchangeDeclare("header-exchange", durable: true, type: ExchangeType.Headers);
 
