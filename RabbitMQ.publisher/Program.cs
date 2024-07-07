@@ -33,7 +33,7 @@ var channel = connection.CreateModel();
 
 //1. parametre exchange --> exchange adı
 
-//2. parametre durable --> uygulamaya restart atılırsa exchange 'im kaybolmasın, fiziksel olarak kaydedilsin
+//2. parametre durable --> true: uygulamaya restart atılırsa exchange 'im kaybolmasın, fiziksel olarak kaydedilsin
 
 //3. parametre type ---> exchange tipinin fanout oldugunu belirttim
 

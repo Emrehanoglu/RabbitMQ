@@ -1,9 +1,17 @@
-﻿using RabbitMQ.Client;
+﻿using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using RabbitMQWeb.Watermark.Services;
+using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Threading;
+using System.Threading.Tasks;
+using RabbitMQWeb.Watermark.Services;
 
 namespace RabbitMQWeb.Watermark.BackgroundServices
 {
@@ -23,15 +31,15 @@ namespace RabbitMQWeb.Watermark.BackgroundServices
         {
             _channel = _rabbitMQClientService.Connect();
 
-            _channel.BasicQos(0,1,false);
-        
+            _channel.BasicQos(0, 1, false);
+
             return base.StartAsync(cancellationToken);
         }
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
             var consumer = new AsyncEventingBasicConsumer(_channel);
 
-            _channel.BasicConsume(RabbitMQClientService.QueueName,false,consumer);
+            _channel.BasicConsume(RabbitMQClientService.QueueName, false, consumer);
 
             consumer.Received += Consumer_Received;
 
@@ -40,22 +48,16 @@ namespace RabbitMQWeb.Watermark.BackgroundServices
 
         private Task Consumer_Received(object sender, BasicDeliverEventArgs @event)
         {
-            //resme yazı ekleme işlemi burada gerceklesiyor
-
-            Task.Delay(10000).Wait();
-
-
             try
             {
-                var productImageCreatedEvent = JsonSerializer.Deserialize<ProductImageCreatedEvent>(Encoding.UTF8.GetString(@event.Body.ToArray()));
+                var ProductImageCreatedEvent = JsonSerializer.Deserialize<ProductImageCreatedEvent>(Encoding.UTF8.GetString(@event.Body.ToArray()));
 
 
-                //düzenleyeceğim resmin önce path 'ini alıyorum
-                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images", productImageCreatedEvent.ImageName);
+
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images", ProductImageCreatedEvent.ImageName);
 
                 var siteName = "wwww.mysite.com";
 
-                //resmin pathini veriyorum ve resmi alıyorum.
                 using var img = Image.FromFile(path);
 
                 using var graphic = Graphics.FromImage(img);
@@ -72,7 +74,7 @@ namespace RabbitMQWeb.Watermark.BackgroundServices
 
                 graphic.DrawString(siteName, font, brush, position);
 
-                img.Save("wwwroot/Images/watermarks/" + productImageCreatedEvent.ImageName);
+                img.Save("wwwroot/Images/watermarks/" + ProductImageCreatedEvent.ImageName);
 
 
                 img.Dispose();
@@ -88,6 +90,10 @@ namespace RabbitMQWeb.Watermark.BackgroundServices
 
 
             return Task.CompletedTask;
+
+
+
+
         }
 
         public override Task StopAsync(CancellationToken cancellationToken)

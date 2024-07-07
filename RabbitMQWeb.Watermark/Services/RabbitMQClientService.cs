@@ -17,9 +17,10 @@ public class RabbitMQClientService:IDisposable
         _connectionFactory = connectionFactory;
         _logger = logger;
     }
-
+     
     public IModel Connect()
     {
+        _connectionFactory.DispatchConsumersAsync = true;
         _connection = _connectionFactory.CreateConnection();
 
         //_connecton 'ın Uri değeri Program.cs içerisinde verildi.
