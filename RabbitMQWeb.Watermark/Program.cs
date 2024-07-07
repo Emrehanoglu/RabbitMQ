@@ -11,7 +11,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddSingleton(sp => new ConnectionFactory()
 {
-    Uri = new Uri(builder.Configuration.GetConnectionString("RabbitMQ"))
+    Uri = new Uri(builder.Configuration.GetConnectionString("RabbitMq"))
 });
 
 builder.Services.AddSingleton<RabbitMQClientService>();

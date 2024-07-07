@@ -6,16 +6,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RabbitMQWeb.Watermark.Models;
+using RabbitMQWeb.Watermark.Services;
 
 namespace RabbitMQWeb.Watermark.Controllers
 {
     public class ProductsController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly RabbitMQPublisher _rabbitMQPublisher;
 
-        public ProductsController(AppDbContext context)
+        public ProductsController(AppDbContext context, RabbitMQPublisher rabbitMQPublisher)
         {
             _context = context;
+            _rabbitMQPublisher = rabbitMQPublisher;
         }
 
         // GET: Products
@@ -50,19 +53,37 @@ namespace RabbitMQWeb.Watermark.Controllers
             return View();
         }
 
-        // POST: Products/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Price,Stock,PictureUrl")] Product product)
+        public async Task<IActionResult> Create([Bind("Id,Name,Price,Stock,ImageName")] Product product,
+            IFormFile ImageFile)
         {
-            if (ModelState.IsValid)
+            if (ImageFile is { Length: > 0 })
             {
-                _context.Add(product);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (!ModelState.IsValid)
+                {
+                    return View(product);
+                }
+                var randomImageName = Guid.NewGuid() + Path.GetExtension(ImageFile.FileName);
+                //Path.GetExtension(ImageFile.FileName) : .png, .jpg gibi ifadeler gelecek.
+
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", randomImageName);
+
+                //FileStream oluşturuldu.
+                await using FileStream stream = new(path, FileMode.Create);
+
+
+                await ImageFile.CopyToAsync(stream);
+
+
+                _rabbitMQPublisher.Publish(new ProductImageCreatedEvent() { ImageName = randomImageName });
+
+                product.ImageName = randomImageName;
             }
+
+            _context.Add(product);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
             return View(product);
         }
 

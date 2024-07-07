@@ -38,7 +38,7 @@ public class RabbitMQClientService:IDisposable
         //channel üzerinden Queue Declare edelim
         _channel.QueueDeclare(QueueName, durable: true, false, false, null);
 
-        _channel.QueueBind(ExchangeName,QueueName,RoutingWatermark);
+        _channel.QueueBind(exchange: ExchangeName, queue: QueueName, routingKey: RoutingWatermark);
 
         _logger.LogInformation("RabbitMQ ile baglantı kuruldu...");
 
@@ -47,8 +47,8 @@ public class RabbitMQClientService:IDisposable
 
     public void Dispose()
     {
-        _connection?.Close();
-        _connection?.Dispose();
+        _channel?.Close();
+        _channel?.Dispose();
         _connection?.Close();
         _connection?.Dispose();
         _logger.LogInformation("RabbitMQ ile baglantı koptu...");
