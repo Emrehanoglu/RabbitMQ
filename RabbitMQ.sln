@@ -21,7 +21,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RabbitMQ.ComplexTypeSubscri
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ImageWatermark", "ImageWatermark", "{1A702DA9-65E5-419D-8256-6F27CDB8AFA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQWeb.Watermark", "RabbitMQWeb.Watermark\RabbitMQWeb.Watermark.csproj", "{AE81D059-CB0D-4634-B5E3-A8C981157F20}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RabbitMQWeb.Watermark", "RabbitMQWeb.Watermark\RabbitMQWeb.Watermark.csproj", "{AE81D059-CB0D-4634-B5E3-A8C981157F20}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ExcelCreate", "ExcelCreate", "{9EFD19A0-069C-4D7E-8C9C-7BA286D4D39F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQWeb.ExcelCreate", "RabbitMQWeb.ExcelCreate\RabbitMQWeb.ExcelCreate.csproj", "{7A22775A-BEAE-468C-9DD1-D8753A4FBFE1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,12 +69,17 @@ Global
 		{AE81D059-CB0D-4634-B5E3-A8C981157F20}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE81D059-CB0D-4634-B5E3-A8C981157F20}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE81D059-CB0D-4634-B5E3-A8C981157F20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A22775A-BEAE-468C-9DD1-D8753A4FBFE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A22775A-BEAE-468C-9DD1-D8753A4FBFE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A22775A-BEAE-468C-9DD1-D8753A4FBFE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A22775A-BEAE-468C-9DD1-D8753A4FBFE1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{AE81D059-CB0D-4634-B5E3-A8C981157F20} = {1A702DA9-65E5-419D-8256-6F27CDB8AFA2}
+		{7A22775A-BEAE-468C-9DD1-D8753A4FBFE1} = {9EFD19A0-069C-4D7E-8C9C-7BA286D4D39F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BB30A224-ECCB-456C-A4A0-54BA591BB09E}
