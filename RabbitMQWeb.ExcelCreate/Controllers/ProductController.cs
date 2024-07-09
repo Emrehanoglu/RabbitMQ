@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RabbitMQWeb.ExcelCreate.Models;
+using RabbitMQWeb.ExcelCreate.Services;
 
 namespace RabbitMQWeb.ExcelCreate.Controllers;
 
@@ -11,11 +12,14 @@ public class ProductController : Controller
 {
     private readonly UserManager<IdentityUser> _userManager;
     private readonly AppDbContext _appDbContext;
+    private readonly RabbitMQPublisher _rabbitMQPublisher;
 
-    public ProductController(UserManager<IdentityUser> userManager, AppDbContext appDbContext)
+    public ProductController(UserManager<IdentityUser> userManager, 
+        AppDbContext appDbContext, RabbitMQPublisher rabbitMQPublisher)
     {
         _userManager = userManager;
         _appDbContext = appDbContext;
+        _rabbitMQPublisher = rabbitMQPublisher;
     }
 
     public IActionResult Index()
@@ -43,6 +47,12 @@ public class ProductController : Controller
         await _appDbContext.SaveChangesAsync();
 
         //RabbitMq'ya mesaj gönderildi.
+        _rabbitMQPublisher.Publish(new Shared.CreateExcelMessage
+        {
+            FileId = userFile.Id,
+            UserId = userFile.UserId
+        });
+
         TempData["StartCreatingExcel"] = true;
 
         return RedirectToAction("Files","Product");
