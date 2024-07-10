@@ -37,14 +37,6 @@ public class RabbitMQClientService : IDisposable
         //channel yoksa oluşturalım
         _channel = _connection.CreateModel();
 
-        //channel üzerinden Exchange Declare edelim
-        _channel.ExchangeDeclare(ExchangeName, type: "direct", durable: true, false);
-
-        //channel üzerinden Queue Declare edelim
-        _channel.QueueDeclare(QueueName, durable: true, false, false, null);
-
-        _channel.QueueBind(exchange: ExchangeName, queue: QueueName, routingKey: RoutingExcel);
-
         _logger.LogInformation("RabbitMQ ile baglantı kuruldu...");
 
         return _channel; //mesajları göndermek üzere _channel geriye döndürüldü.
