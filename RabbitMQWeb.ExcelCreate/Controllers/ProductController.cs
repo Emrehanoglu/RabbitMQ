@@ -49,8 +49,7 @@ public class ProductController : Controller
         //RabbitMq'ya mesaj gönderildi.
         _rabbitMQPublisher.Publish(new Shared.CreateExcelMessage
         {
-            FileId = userFile.Id,
-            UserId = userFile.UserId
+            FileId = userFile.Id
         });
 
         TempData["StartCreatingExcel"] = true;
