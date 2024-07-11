@@ -38,6 +38,8 @@ namespace FileCreateWorkerService
         {
             var consumer = new AsyncEventingBasicConsumer(_channel);
 
+            _channel.BasicConsume(RabbitMQClientService.QueueName,false,consumer);
+
             consumer.Received += Consumer_Received;
 
             return Task.CompletedTask;            
@@ -66,7 +68,7 @@ namespace FileCreateWorkerService
             multipartFormDataContent.Add(new ByteArrayContent(ms.ToArray()), "file", 
                 Guid.NewGuid().ToString() + ".xlsx");
 
-            var baseUrl = "https://localhost:44355/api/files";
+            var baseUrl = "https://localhost:7063/api/files";
 
             using (var httpClient = new HttpClient())
             {
