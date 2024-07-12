@@ -27,7 +27,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ExcelCreate", "ExcelCreate"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RabbitMQWeb.ExcelCreate", "RabbitMQWeb.ExcelCreate\RabbitMQWeb.ExcelCreate.csproj", "{7A22775A-BEAE-468C-9DD1-D8753A4FBFE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileCreateWorkerService", "ExcelCreate\FileCreateWorkerService\FileCreateWorkerService.csproj", "{54298F31-9BFD-460A-90D9-D3CD84DA31F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileCreateWorkerService", "ExcelCreate\FileCreateWorkerService\FileCreateWorkerService.csproj", "{54298F31-9BFD-460A-90D9-D3CD84DA31F4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RabbitMQ.Tekrar", "RabbitMQ.Tekrar", "{A9A1ABA2-36CD-45F3-904A-E9AA2067780A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQ.publisher", "RabbitMQ.Tekrar\RabbitMQ.publisher\RabbitMQ.publisher.csproj", "{0163A8A4-FD7C-4943-B47D-72DB77F19F24}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NoExchange", "NoExchange", "{5FDB6314-9B65-489F-8054-A9120C01B558}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQ.subscriber", "RabbitMQ.Tekrar\NoExchange\RabbitMQ.subscriber\RabbitMQ.subscriber.csproj", "{E37B8E88-825C-46A5-AA63-FA26625F1366}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -79,6 +87,14 @@ Global
 		{54298F31-9BFD-460A-90D9-D3CD84DA31F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54298F31-9BFD-460A-90D9-D3CD84DA31F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54298F31-9BFD-460A-90D9-D3CD84DA31F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0163A8A4-FD7C-4943-B47D-72DB77F19F24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0163A8A4-FD7C-4943-B47D-72DB77F19F24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0163A8A4-FD7C-4943-B47D-72DB77F19F24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0163A8A4-FD7C-4943-B47D-72DB77F19F24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E37B8E88-825C-46A5-AA63-FA26625F1366}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E37B8E88-825C-46A5-AA63-FA26625F1366}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E37B8E88-825C-46A5-AA63-FA26625F1366}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E37B8E88-825C-46A5-AA63-FA26625F1366}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,6 +103,9 @@ Global
 		{AE81D059-CB0D-4634-B5E3-A8C981157F20} = {1A702DA9-65E5-419D-8256-6F27CDB8AFA2}
 		{7A22775A-BEAE-468C-9DD1-D8753A4FBFE1} = {9EFD19A0-069C-4D7E-8C9C-7BA286D4D39F}
 		{54298F31-9BFD-460A-90D9-D3CD84DA31F4} = {9EFD19A0-069C-4D7E-8C9C-7BA286D4D39F}
+		{0163A8A4-FD7C-4943-B47D-72DB77F19F24} = {5FDB6314-9B65-489F-8054-A9120C01B558}
+		{5FDB6314-9B65-489F-8054-A9120C01B558} = {A9A1ABA2-36CD-45F3-904A-E9AA2067780A}
+		{E37B8E88-825C-46A5-AA63-FA26625F1366} = {5FDB6314-9B65-489F-8054-A9120C01B558}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BB30A224-ECCB-456C-A4A0-54BA591BB09E}
