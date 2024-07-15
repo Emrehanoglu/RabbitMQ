@@ -39,15 +39,27 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RabbitMQ.subscriber", "Rabb
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FanoutExchange", "FanoutExchange", "{228A4AA7-691F-42C7-94FD-009C3EAABE1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQ.publisher", "RabbitMQ.Tekrar\FanoutExchange\RabbitMQ.publisher\RabbitMQ.publisher.csproj", "{84E09413-ED31-449D-85D5-08A9EC2935FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RabbitMQ.publisher", "RabbitMQ.Tekrar\FanoutExchange\RabbitMQ.publisher\RabbitMQ.publisher.csproj", "{84E09413-ED31-449D-85D5-08A9EC2935FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQ.subscriber", "RabbitMQ.Tekrar\FanoutExchange\RabbitMQ.subscriber\RabbitMQ.subscriber.csproj", "{42CEFC3D-CDEF-47D6-949A-4053DE1DE164}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RabbitMQ.subscriber", "RabbitMQ.Tekrar\FanoutExchange\RabbitMQ.subscriber\RabbitMQ.subscriber.csproj", "{42CEFC3D-CDEF-47D6-949A-4053DE1DE164}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DirectExchange", "DirectExchange", "{45CEAD4B-7283-4175-8A82-42D4EB635A47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQ.publisher", "RabbitMQ.Tekrar\DirectExchange\RabbitMQ.publisher\RabbitMQ.publisher.csproj", "{0163273F-404D-4FA3-A7BA-45C76ECCEB68}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RabbitMQ.publisher", "RabbitMQ.Tekrar\DirectExchange\RabbitMQ.publisher\RabbitMQ.publisher.csproj", "{0163273F-404D-4FA3-A7BA-45C76ECCEB68}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQ.subscriber", "RabbitMQ.Tekrar\DirectExchange\RabbitMQ.subscriber\RabbitMQ.subscriber.csproj", "{897F3167-C934-40CB-BC33-5AA27E4678B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RabbitMQ.subscriber", "RabbitMQ.Tekrar\DirectExchange\RabbitMQ.subscriber\RabbitMQ.subscriber.csproj", "{897F3167-C934-40CB-BC33-5AA27E4678B1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TopicExchange", "TopicExchange", "{0065AF21-991A-4F4C-97DC-BB279D963A75}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQ.publisher", "RabbitMQ.Tekrar\TopicExchange\RabbitMQ.publisher\RabbitMQ.publisher.csproj", "{D85E4779-90F6-4E14-A2C4-17BFE847FAD6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQ.subscriber", "RabbitMQ.Tekrar\TopicExchange\RabbitMQ.subscriber\RabbitMQ.subscriber.csproj", "{68269CDB-16CC-4AB3-AC59-62D5604A0811}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HeaderExchange", "HeaderExchange", "{1DD8E0E7-F21E-4CD0-ABDB-2E20FE1044B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQ.publisher", "RabbitMQ.Tekrar\HeaderExchange\RabbitMQ.publisher\RabbitMQ.publisher.csproj", "{C4CBE889-DA68-4D1D-9144-9C08484E880F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQ.subscriber", "RabbitMQ.Tekrar\HeaderExchange\RabbitMQ.subscriber\RabbitMQ.subscriber.csproj", "{155C17B2-9873-4781-A295-F3A061C61702}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -123,6 +135,22 @@ Global
 		{897F3167-C934-40CB-BC33-5AA27E4678B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{897F3167-C934-40CB-BC33-5AA27E4678B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{897F3167-C934-40CB-BC33-5AA27E4678B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D85E4779-90F6-4E14-A2C4-17BFE847FAD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D85E4779-90F6-4E14-A2C4-17BFE847FAD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D85E4779-90F6-4E14-A2C4-17BFE847FAD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D85E4779-90F6-4E14-A2C4-17BFE847FAD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68269CDB-16CC-4AB3-AC59-62D5604A0811}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68269CDB-16CC-4AB3-AC59-62D5604A0811}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68269CDB-16CC-4AB3-AC59-62D5604A0811}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68269CDB-16CC-4AB3-AC59-62D5604A0811}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4CBE889-DA68-4D1D-9144-9C08484E880F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4CBE889-DA68-4D1D-9144-9C08484E880F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4CBE889-DA68-4D1D-9144-9C08484E880F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4CBE889-DA68-4D1D-9144-9C08484E880F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{155C17B2-9873-4781-A295-F3A061C61702}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{155C17B2-9873-4781-A295-F3A061C61702}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{155C17B2-9873-4781-A295-F3A061C61702}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{155C17B2-9873-4781-A295-F3A061C61702}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -140,6 +168,12 @@ Global
 		{45CEAD4B-7283-4175-8A82-42D4EB635A47} = {A9A1ABA2-36CD-45F3-904A-E9AA2067780A}
 		{0163273F-404D-4FA3-A7BA-45C76ECCEB68} = {45CEAD4B-7283-4175-8A82-42D4EB635A47}
 		{897F3167-C934-40CB-BC33-5AA27E4678B1} = {45CEAD4B-7283-4175-8A82-42D4EB635A47}
+		{0065AF21-991A-4F4C-97DC-BB279D963A75} = {A9A1ABA2-36CD-45F3-904A-E9AA2067780A}
+		{D85E4779-90F6-4E14-A2C4-17BFE847FAD6} = {0065AF21-991A-4F4C-97DC-BB279D963A75}
+		{68269CDB-16CC-4AB3-AC59-62D5604A0811} = {0065AF21-991A-4F4C-97DC-BB279D963A75}
+		{1DD8E0E7-F21E-4CD0-ABDB-2E20FE1044B7} = {A9A1ABA2-36CD-45F3-904A-E9AA2067780A}
+		{C4CBE889-DA68-4D1D-9144-9C08484E880F} = {1DD8E0E7-F21E-4CD0-ABDB-2E20FE1044B7}
+		{155C17B2-9873-4781-A295-F3A061C61702} = {1DD8E0E7-F21E-4CD0-ABDB-2E20FE1044B7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BB30A224-ECCB-456C-A4A0-54BA591BB09E}
